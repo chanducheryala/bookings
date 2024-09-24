@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService{
             }
             return authRepository.save(user);
         } catch (Exception e) {
-            throw new RuntimeException(Arrays.toString(e.getStackTrace()));
+            throw new RuntimeException(e);
         }
     }
 }
