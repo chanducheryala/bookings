@@ -1,13 +1,17 @@
 package com.example.booking.demo.service;
 
+import com.example.booking.demo.dto.UserDto;
+import com.example.booking.demo.exceptions.UserNotFoundException;
 import com.example.booking.demo.model.User;
 import com.example.booking.demo.repository.AuthRepository;
-import jakarta.persistence.EntityManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.UUID;
 
+
+@Slf4j
 @Service
 public class AuthServiceImpl implements AuthService{
 
@@ -19,20 +23,35 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public User register(User user) {
+    public UserDto register(UserDto userDto) {
         try {
-            if(user.getFirstName().trim().length() == 0) {
-                throw new IllegalArgumentException("first name shouldn't be empty");
-            } else if(user.getLastName().trim().length() == 0) {
-                throw new IllegalArgumentException("last name shouldn't be empty");
-            } else if(user.getPhoneNumber().trim().length() == 0) {
-                throw new IllegalArgumentException("phone number shouldn't be empty");
-            } else if(user.getEmail().trim().length() == 0) {
-                throw new IllegalArgumentException("email shouldn't be empty");
-            }
-            return authRepository.save(user);
+            User user = new User()
+                        .setFirstName(userDto.getFirstName())
+                        .setLastName(userDto.getLastName())
+                        .setEmail(userDto.getEmail())
+                        .setRole(userDto.getRole())
+                        .setPhoneNumber(userDto.getPhoneNumber())
+                        .setRole(userDto.getRole());
+            User savedUser = authRepository.save(user);
+            log.info("saved user details {}", savedUser.toString());
+            userDto.setId(savedUser.getId());
+            return userDto;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public User findById(UUID id) {
+        try {
+            if(id == null) {
+                throw new IllegalArgumentException("Id cannot be NULL");
+            }
+            return authRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
