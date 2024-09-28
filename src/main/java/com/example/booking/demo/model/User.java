@@ -4,7 +4,6 @@ import com.example.booking.demo.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +19,9 @@ public class User {
     @Column(name = "id")
     private UUID id;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -29,6 +31,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -36,17 +41,14 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Branch> branches;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Room> rooms;
-
-    public User(String firstName, String lastName, String email, String phoneNumber) {
+    public User(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.password = password;
     }
 
     @Override

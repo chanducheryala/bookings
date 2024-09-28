@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
@@ -19,23 +20,23 @@ import java.util.UUID;
 @RequestMapping("api/v1/auth")
 public class AuthController {
     private final AuthService authService;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
     @Autowired
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String getHello() {
         return "Hello";
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> create(@Valid  @RequestBody UserDto userDto, @RequestParam(required = false, name = "role") Role role) {
+    public ResponseEntity<UserDto> create(@Valid  @RequestBody UserDto userDto) {
         try {
-            log.info("role is {}", role);
-            userDto.setRole(role);
             log.info("userDto is {}", userDto);
+            userDto.setPassword(encoder.encode(userDto.getPassword()));
             return new ResponseEntity<UserDto>(authService.register(userDto), HttpStatus.OK);
         } catch (Exception e) {
             log.error("Error during registration: {}", e.getMessage());
