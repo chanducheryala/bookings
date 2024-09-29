@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface AuthService {
     UserDto register(UserDto userDto);
 
-    User findById(UUID id);
+    User findById(Long id);
 }

@@ -8,9 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
-
 @Slf4j
 @Service
 public class AuthServiceImpl implements AuthService{
@@ -42,7 +39,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public User findById(UUID id) {
+    public User findById(Long id) {
         try {
             if(id == null) {
                 throw new IllegalArgumentException("Id cannot be NULL");

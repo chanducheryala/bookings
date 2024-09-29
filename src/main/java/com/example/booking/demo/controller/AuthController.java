@@ -45,7 +45,7 @@ public class AuthController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") UUID id) {
+    public ResponseEntity<User> findById(@PathVariable("id") Long id) {
         try{
             log.info("id is {}", id);
             return new ResponseEntity<User>(authService.findById(id), HttpStatus.OK);

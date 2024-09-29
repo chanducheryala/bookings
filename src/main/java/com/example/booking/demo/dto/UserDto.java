@@ -5,11 +5,9 @@ import com.example.booking.demo.model.User;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 public class UserDto {
-    private UUID id;
+    private Long id;
 
     @NotBlank(message = "first name cannot be empty")
     private String firstName;
