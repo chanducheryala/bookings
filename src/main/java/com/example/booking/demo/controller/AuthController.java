@@ -1,9 +1,11 @@
 package com.example.booking.demo.controller;
 
+import com.example.booking.demo.dto.AuthDto;
 import com.example.booking.demo.dto.UserDto;
 import com.example.booking.demo.enums.Role;
 import com.example.booking.demo.model.User;
 import com.example.booking.demo.service.AuthService;
+import com.example.booking.demo.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,12 @@ import java.util.UUID;
 public class AuthController {
     private final AuthService authService;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+    private final JwtService jwtService;
 
     @Autowired
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, JwtService jwtService) {
         this.authService = authService;
+        this.jwtService = jwtService;
     }
 
     @GetMapping("/")
@@ -53,4 +57,10 @@ public class AuthController {
             throw new RuntimeException(e);
         }
     }
+
+
+//    @PostMapping("login")
+//    public String login(@RequestBody AuthDto authDto) {
+//
+//    }
 }

@@ -3,8 +3,6 @@ package com.example.booking.demo.model;
 import com.example.booking.demo.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -25,33 +23,27 @@ import java.util.Collections;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "username", nullable = false)
+
+    @Column(name = "username")
     private String username;
 
-    @NotBlank
-    @Size(max = 50)
     @Column(name = "first_name")
     private String firstName;
 
-    @NotBlank
-    @Size(max = 50)
+
     @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank
-    @Email
-    @Column(name = "email", unique = true, nullable = false)
+
+    @Column(name = "email")
     private String email;
 
     @JsonIgnore
-    @NotBlank
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Size(max = 15)
@@ -74,9 +66,12 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", role=" + role +
                 '}';
