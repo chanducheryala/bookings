@@ -8,7 +8,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -43,7 +42,6 @@ public class JwtService {
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
 
     private Claims extractAllClaims(String token) {
         return Jwts
