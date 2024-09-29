@@ -1,16 +1,15 @@
 package com.example.booking.demo.config;
 
 import com.example.booking.demo.repository.UserRespository;
-import com.example.booking.demo.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,13 +30,14 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/auth/register")
                         .permitAll()
                         .anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> (UserDetails) userRespository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("user name not found"));
+        return username -> userRespository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("user name not found"));
     }
 
     @Bean
