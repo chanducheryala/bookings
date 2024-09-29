@@ -2,7 +2,6 @@ package com.example.booking.demo.controller;
 
 import com.example.booking.demo.dto.AuthDto;
 import com.example.booking.demo.dto.UserDto;
-import com.example.booking.demo.enums.Role;
 import com.example.booking.demo.model.User;
 import com.example.booking.demo.service.AuthService;
 import com.example.booking.demo.service.JwtService;
@@ -14,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import java.util.UUID;
+
 
 @Validated
 @Slf4j
@@ -23,12 +22,10 @@ import java.util.UUID;
 public class AuthController {
     private final AuthService authService;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
-    private final JwtService jwtService;
 
     @Autowired
     public AuthController(AuthService authService, JwtService jwtService) {
         this.authService = authService;
-        this.jwtService = jwtService;
     }
 
     @GetMapping("/")
@@ -59,8 +56,13 @@ public class AuthController {
     }
 
 
-//    @PostMapping("login")
-//    public String login(@RequestBody AuthDto authDto) {
-//
-//    }
+    @PostMapping("/login")
+    public String login(@RequestBody AuthDto authDto) {
+        try {
+            log.info("authDto : {}", authDto.toString());
+            return authService.authenticate(authDto);
+        } catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
