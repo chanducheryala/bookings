@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.security.SecureRandom;
@@ -19,16 +20,9 @@ import java.util.function.Function;
 @Slf4j
 @Service
 public class JwtService {
-    private String SECRET_KEY;
 
-    public JwtService() {
-        SecureRandom secureRandom = new SecureRandom();
-        byte[] key = new byte[64];
-        secureRandom.nextBytes(key);
-        String secretKey = Base64.getEncoder().encodeToString(key);
-        SECRET_KEY = secretKey;
-        log.info("secret key : {}", secretKey);
-    }
+    @Value("${jwt.secret}")
+    private String SECRET_KEY;
 
     public  String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
