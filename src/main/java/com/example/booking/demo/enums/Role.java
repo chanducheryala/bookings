@@ -5,4 +5,5 @@ public enum Role {
     ADMIN,
     SUBADMIN,
     USER,
+    LOCATION_MANAGER
 }

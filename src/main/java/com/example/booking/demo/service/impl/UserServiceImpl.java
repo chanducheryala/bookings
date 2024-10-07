@@ -1,7 +1,8 @@
-package com.example.booking.demo.service;
+package com.example.booking.demo.service.impl;
 
 import com.example.booking.demo.model.User;
 import com.example.booking.demo.repository.UserRespository;
+import com.example.booking.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRespository userRespository;
     @Override
