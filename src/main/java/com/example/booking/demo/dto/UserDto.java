@@ -3,10 +3,11 @@ package com.example.booking.demo.dto;
 import com.example.booking.demo.enums.Role;
 import com.example.booking.demo.model.User;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class UserDto {
+public abstract class UserDto {
     private Long id;
 
     @NotBlank(message = "first name cannot be empty")
@@ -29,7 +30,13 @@ public class UserDto {
 
     private Role role;
 
-    public User toUser() {
-        return new User(firstName, lastName, email, phoneNumber, username, password);
+
+    public UserDto(@NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull String phoneNumber, @NotNull String username, @NotNull String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.password = password;
     }
 }
