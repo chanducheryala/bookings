@@ -1,14 +1,15 @@
 package com.example.booking.demo.model;
 
 import com.example.booking.demo.enums.Role;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.List;
 
 @Entity
-public class LocationManager extends User{
-    public LocationManager(
+public class LocationSubManager extends User {
+    public LocationSubManager(
             @NotNull String firstName,
             @NotNull String lastName,
             @NotNull String email,
@@ -17,17 +18,13 @@ public class LocationManager extends User{
             @NotNull String password
     ) {
         super(firstName, lastName, email, phoneNumber, username, password);
-        this.setRole(Role.LOCATION_MANAGER);
+        this.setRole(Role.LOCATION_SUBMANAGER);
     }
-    public LocationManager() {}
+    public LocationSubManager() {}
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
-            name = "location_id"
+            name = "location_manager_id"
     )
-    private Location location;
-
-
-    @OneToMany(mappedBy = "locationManager", cascade = CascadeType.ALL)
-    List<LocationSubManager> locationSubManagers;
+    private LocationManager locationManager;
 }
