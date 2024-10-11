@@ -7,17 +7,19 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-public class LocationManager extends User{
+public class LocationManager extends Person{
     public LocationManager(
             @NotNull String firstName,
             @NotNull String lastName,
             @NotNull String email,
             @NotNull String phoneNumber,
             @NotNull String username,
-            @NotNull String password
+            @NotNull String password,
+            Admin admin
     ) {
         super(firstName, lastName, email, phoneNumber, username, password);
         this.setRole(Role.LOCATION_MANAGER);
+        this.admin = admin;
     }
     public LocationManager() {}
 

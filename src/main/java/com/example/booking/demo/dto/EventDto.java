@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -26,6 +27,9 @@ public class EventDto {
 
     @NotBlank(message = "duration cannot be null")
     private int duration;
+
+    @NotBlank(message = "capacity cannot be null")
+    private BigInteger capacity;
 
     private EventStatus status;
 }

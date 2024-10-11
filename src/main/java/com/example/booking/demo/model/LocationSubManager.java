@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-public class LocationSubManager extends User {
+public class LocationSubManager extends Person {
     public LocationSubManager(
             @NotNull String firstName,
             @NotNull String lastName,

@@ -1,6 +1,6 @@
 package com.example.booking.demo.service;
 
-import com.example.booking.demo.model.User;
+import com.example.booking.demo.model.Person;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.security.Key;
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,17 +48,17 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, User user) {
+    public Boolean validateToken(String token, Person person) {
         final String username = extractUsername(token);
-        return (username.equals(user.getEmail()) && !isTokenExpired(token));
+        return (username.equals(person.getEmail()) && !isTokenExpired(token));
     }
 
-    public String generateToken(User user) {
+    public String generateToken(Person person) {
         Map<String, Object> claims = new HashMap<>();
         return Jwts
                 .builder()
                 .setClaims(claims)
-                .setSubject(user.getEmail())
+                .setSubject(person.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 60 * 1000))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

@@ -1,8 +1,8 @@
 package com.example.booking.demo.controller;
 
 import com.example.booking.demo.dto.AuthDto;
-import com.example.booking.demo.dto.UserDto;
-import com.example.booking.demo.model.User;
+import com.example.booking.demo.dto.PersonDto;
+import com.example.booking.demo.model.Person;
 import com.example.booking.demo.service.AuthService;
 import com.example.booking.demo.service.JwtService;
 import jakarta.validation.Valid;
@@ -34,11 +34,11 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> create(@Valid  @RequestBody UserDto userDto) {
+    public ResponseEntity<PersonDto> create(@Valid  @RequestBody PersonDto userDto) {
         try {
             log.info("userDto is {}", userDto);
             userDto.setPassword(encoder.encode(userDto.getPassword()));
-            return new ResponseEntity<UserDto>(authService.register(userDto), HttpStatus.OK);
+            return new ResponseEntity<PersonDto>(authService.register(userDto), HttpStatus.OK);
         } catch (Exception e) {
             log.error("Error during registration: {}", e.getMessage());
             throw new RuntimeException(e);
@@ -46,10 +46,10 @@ public class AuthController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Person> findById(@PathVariable("id") Long id) {
         try{
             log.info("id is {}", id);
-            return new ResponseEntity<User>(authService.findById(id), HttpStatus.OK);
+            return new ResponseEntity<Person>(authService.findById(id), HttpStatus.OK);
         }catch (Exception e) {
             throw new RuntimeException(e);
         }

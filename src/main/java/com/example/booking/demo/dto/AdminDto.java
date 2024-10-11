@@ -4,7 +4,7 @@ import com.example.booking.demo.enums.Role;
 import jakarta.validation.constraints.NotNull;
 
 
-public class AdminDto extends UserDto{
+public class AdminDto extends PersonDto {
     public AdminDto(
             @NotNull String firstName,
             @NotNull String lastName,

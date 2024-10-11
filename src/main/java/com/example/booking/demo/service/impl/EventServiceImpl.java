@@ -43,6 +43,7 @@ public class EventServiceImpl implements EventService {
                 .setTime(eventDto.getTime())
                 .setDuration(eventDto.getDuration())
                 .setSubLocation(subLocation.get())
+                .setCapacity(eventDto.getCapacity())
                 .setLocationSubManager(locationSubManager);
         Event savedEvent = eventRespository.save(event);
         eventDto.setId(savedEvent.getId());
