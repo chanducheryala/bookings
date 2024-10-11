@@ -1,16 +1,14 @@
 package com.example.booking.demo.service;
 
 import com.example.booking.demo.dto.AuthDto;
-import com.example.booking.demo.dto.UserDto;
-import com.example.booking.demo.model.User;
+import com.example.booking.demo.dto.PersonDto;
+import com.example.booking.demo.model.Person;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 
 @Service
 public interface AuthService {
-    UserDto register(UserDto userDto);
+    PersonDto register(PersonDto userDto);
     String authenticate(AuthDto authDto);
-    User findById(Long id);
+    Person findById(Long id);
 }

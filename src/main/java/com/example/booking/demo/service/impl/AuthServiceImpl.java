@@ -1,9 +1,9 @@
 package com.example.booking.demo.service.impl;
 
 import com.example.booking.demo.dto.AuthDto;
-import com.example.booking.demo.dto.UserDto;
+import com.example.booking.demo.dto.PersonDto;
 import com.example.booking.demo.exceptions.UserNotFoundException;
-import com.example.booking.demo.model.User;
+import com.example.booking.demo.model.Person;
 import com.example.booking.demo.repository.AuthRepository;
 import com.example.booking.demo.service.AuthService;
 import com.example.booking.demo.service.JwtService;
@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserDto register(UserDto userDto) {
+    public PersonDto register(PersonDto userDto) {
         try {
             return userDto;
         } catch (Exception e) {
@@ -43,9 +44,9 @@ public class AuthServiceImpl implements AuthService {
     public String authenticate(AuthDto authDto) {
         try {
            Authentication authentication =  authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDto.getEmail(), authDto.getPassword()));
-            User user = authRepository.findByEmail(authDto.getEmail());
-            log.info("user {}", user);
-            String token = jwtService.generateToken(user);
+            Person person = authRepository.findByEmail(authDto.getEmail());
+            log.info("user {}", person.toString());
+            String token = jwtService.generateToken(person);
             log.info("authentication : {}", authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.info("token {}", token);
@@ -56,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User findById(Long id) {
+    public Person findById(Long id) {
         try {
             if(id == null) {
                 throw new IllegalArgumentException("Id cannot be NULL");
@@ -66,5 +67,4 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException(e);
         }
     }
-
 }

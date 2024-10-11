@@ -1,6 +1,6 @@
 package com.example.booking.demo.repository;
 
-import com.example.booking.demo.model.User;
+import com.example.booking.demo.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +8,6 @@ import java.util.Optional;
 
 
 @Repository
-public interface UserRespository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
+public interface PersonRespository extends JpaRepository<Person, Long> {
+    Optional<Person> findByEmail(String email);
 }

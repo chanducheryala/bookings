@@ -1,10 +1,9 @@
 package com.example.booking.demo.config;
 
-import com.example.booking.demo.model.User;
+import com.example.booking.demo.model.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,10 +13,10 @@ public class UserToUserDetails implements UserDetails {
     private String password;
     private List<GrantedAuthority> roles;
 
-    public UserToUserDetails(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.roles = (List<GrantedAuthority>) user.getAuthorities();
+    public UserToUserDetails(Person person) {
+        this.username = person.getUsername();
+        this.password = person.getPassword();
+        this.roles = (List<GrantedAuthority>) person.getAuthorities();
     }
 
     @Override

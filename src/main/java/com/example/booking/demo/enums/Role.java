@@ -7,4 +7,5 @@ public enum Role {
     USER,
     LOCATION_MANAGER,
     LOCATION_SUBMANAGER,
+    CUSTOMER
 }

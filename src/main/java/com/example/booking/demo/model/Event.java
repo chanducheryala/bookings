@@ -5,9 +5,10 @@ import com.example.booking.demo.enums.EventStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
-
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -38,6 +39,9 @@ public class Event {
     @Column(name = "duration")
     private int duration;
 
+    @Column(name = "capacity")
+    private BigInteger capacity;
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -50,4 +54,7 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "sub_location_id")
     private SubLocation subLocation;
+
+    @ManyToMany
+    private Set<User> users;
 }

@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-public class Admin extends User{
+public class Admin extends Person{
     public Admin(
             @NotNull String firstName,
             @NotNull String lastName,

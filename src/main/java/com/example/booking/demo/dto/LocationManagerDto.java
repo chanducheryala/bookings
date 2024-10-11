@@ -3,7 +3,7 @@ package com.example.booking.demo.dto;
 import com.example.booking.demo.enums.Role;
 import jakarta.validation.constraints.NotNull;
 
-public class LocationManagerDto extends UserDto{
+public class LocationManagerDto extends PersonDto {
     public LocationManagerDto(
             @NotNull String firstName,
             @NotNull String lastName,
