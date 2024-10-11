@@ -24,5 +24,5 @@ public class Admin extends User{
     public Admin() {}
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
-    private List<Location> locations;
+    private List<LocationManager> locationManagers;
 }

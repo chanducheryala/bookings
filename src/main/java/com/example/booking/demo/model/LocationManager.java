@@ -21,13 +21,13 @@ public class LocationManager extends User{
     }
     public LocationManager() {}
 
-    @OneToOne
-    @JoinColumn(
-            name = "location_id"
-    )
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
+    @OneToOne(mappedBy = "locationManager")
     private Location location;
 
-
-    @OneToMany(mappedBy = "locationManager", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "locationManager")
     List<LocationSubManager> locationSubManagers;
 }

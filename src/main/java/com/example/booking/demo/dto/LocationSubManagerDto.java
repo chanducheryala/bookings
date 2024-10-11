@@ -18,6 +18,5 @@ public class LocationSubManagerDto extends UserDto{
         super(firstName, lastName, email, phoneNumber, username, password);
         this.setRole(Role.LOCATION_SUBMANAGER);
     }
-
     private LocationManager locationManager;
 }

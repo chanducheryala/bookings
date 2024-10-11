@@ -19,21 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/location-submanager")
+@RequestMapping("api/v1/location-submanagers")
 public class LocationSubManagerController {
-
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
     @Autowired
     private LocationSubManagerService locationSubManagerService;
 
-    @PostMapping("/register")
+    @PostMapping("")
     @PreAuthorize("hasAuthority('LOCATION_MANAGER')")
-    public ResponseEntity<LocationSubManagerDto> create(@Valid @RequestBody LocationSubManagerDto locationSubManagerDto) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LocationManager locationManager = (LocationManager) authentication.getPrincipal();
-        locationSubManagerDto.setLocationManager(locationManager);
-        locationSubManagerDto.setPassword(encoder.encode(locationSubManagerDto.getPassword()));
+    public ResponseEntity<LocationSubManagerDto> create(@RequestBody LocationSubManagerDto locationSubManagerDto) {
         return new ResponseEntity<LocationSubManagerDto>(locationSubManagerService.create(locationSubManagerDto), HttpStatus.CREATED);
     }
 }

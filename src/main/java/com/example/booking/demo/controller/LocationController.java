@@ -19,19 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/location")
+@RequestMapping("api/v1/locations")
 public class LocationController {
 
     @Autowired
     private LocationService locationService;
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('LOCATION_MANAGER')")
     public ResponseEntity<LocationDto> create(@Valid @RequestBody LocationDto locationDto) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Admin admin = (Admin) authentication.getPrincipal();
-        log.info("admin : {}", admin);
-        locationDto.setAdmin(admin);
         return new ResponseEntity<LocationDto>(locationService.create(locationDto), HttpStatus.CREATED);
     }
 }
