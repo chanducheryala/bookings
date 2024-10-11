@@ -25,4 +25,5 @@ public class LocationManagerController {
         locationManagerDto.setPassword(encoder.encode(locationManagerDto.getPassword()));
         return new ResponseEntity<LocationManagerDto>(locationManagerService.create(locationManagerDto), HttpStatus.CREATED);
     }
+
 }

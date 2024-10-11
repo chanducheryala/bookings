@@ -1,6 +1,7 @@
 package com.example.booking.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -11,21 +12,17 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "location")
-public class Location {
+public class Location extends BaseLocation{
+    public Location(String name) {
+        super(name);
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @ManyToOne()
-    @JoinColumn(name = "admin_id")
-    private Admin admin;
-
-    @OneToOne(mappedBy = "location")
+    @OneToOne
+    @JoinColumn(name = "location_manager_id")
     private LocationManager locationManager;
+
+    public Location(@NotBlank(message = "location name cannot be null") String name, LocationManager locationManager) {
+        super(name);
+        this.locationManager = locationManager;
+    }
 }
