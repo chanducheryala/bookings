@@ -30,4 +30,7 @@ public class LocationSubManager extends User {
 
     @OneToMany(mappedBy = "locationSubManager")
     private List<SubLocation> subLocations;
+
+    @OneToMany(mappedBy = "locationSubManager")
+    private List<Event> events;
 }

@@ -2,7 +2,6 @@ package com.example.booking.demo.controller;
 
 
 import com.example.booking.demo.dto.SubLocationDto;
-import com.example.booking.demo.model.SubLocation;
 import com.example.booking.demo.service.SubLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
