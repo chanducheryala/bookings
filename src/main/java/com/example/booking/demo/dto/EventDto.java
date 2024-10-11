@@ -29,7 +29,7 @@ public class EventDto {
     private int duration;
 
     @NotBlank(message = "capacity cannot be null")
-    private BigInteger capacity;
+    private Long capacity;
 
     private EventStatus status;
 }

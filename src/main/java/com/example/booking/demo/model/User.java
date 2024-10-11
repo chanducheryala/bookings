@@ -22,12 +22,15 @@ public class User extends Person {
     }
     public User() {}
 
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_events",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> events;
+
+    public List<Event> getEvents() {
+        return events;
+    }
 }

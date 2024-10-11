@@ -5,15 +5,20 @@ import com.example.booking.demo.model.User;
 import com.example.booking.demo.repository.UserRepository;
 import com.example.booking.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDto create(UserDto userDto) {
+        userDto.setPassword(encoder.encode(userDto.getPassword()));
         User user = new User(
                 userDto.getFirstName(),
                 userDto.getLastName(),

@@ -22,4 +22,10 @@ public class EventController {
     public ResponseEntity<EventDto> create(@RequestBody EventDto eventDto, @RequestParam("sub-location") final Long sub_location_id) {
         return new ResponseEntity<EventDto>(eventService.create(eventDto, sub_location_id), HttpStatus.CREATED);
     }
+
+    @PutMapping("/book")
+    @PreAuthorize("hasAuthority('USER')")
+    public void book(@RequestParam("eventId") Long eventId) {
+        eventService.book(eventId);
+    }
 }

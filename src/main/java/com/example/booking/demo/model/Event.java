@@ -8,6 +8,8 @@ import lombok.experimental.Accessors;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
+@ToString
 @Accessors(chain = true)
 @Table(name = "event")
 public class Event {
@@ -40,8 +43,10 @@ public class Event {
     private int duration;
 
     @Column(name = "capacity")
-    private BigInteger capacity;
+    private Long capacity;
 
+    @Column(name = "booked_capacity")
+    private Long bookedCapacity = 0L;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -55,6 +60,10 @@ public class Event {
     @JoinColumn(name = "sub_location_id")
     private SubLocation subLocation;
 
-    @ManyToMany
-    private Set<User> users;
+    @ManyToMany(mappedBy = "events", fetch = FetchType.EAGER)
+    private List<User> users;
+
+    public List<User> getUsers() {
+        return users;
+    }
 }
