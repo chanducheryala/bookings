@@ -3,10 +3,13 @@ package com.example.booking.demo.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -29,4 +32,7 @@ public class SubLocation extends BaseLocation{
         super(name);
         this.locationSubManager = locationSubManager;
     }
+
+    @OneToMany(mappedBy = "subLocation")
+    private List<Event> events;
 }
