@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(
+                                "/kafka/*",
                                 "api/v1/auth/register",
                                 "api/v1/auth/login",
                                 "api/v1/admin/register",

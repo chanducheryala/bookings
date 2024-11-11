@@ -3,7 +3,6 @@ package com.example.booking.demo.model;
 import com.example.booking.demo.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.List;
 
 
