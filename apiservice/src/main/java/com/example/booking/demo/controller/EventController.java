@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class EventController {
 
     private EventService eventService;
-    private KafkaProducerService kafkaProducerService;
 
-    public EventController(EventService eventService, KafkaProducerService kafkaProducerService) {
-        this.kafkaProducerService = kafkaProducerService;
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 
@@ -28,10 +26,4 @@ public class EventController {
         return new ResponseEntity<EventDto>(eventService.create(eventDto, sub_location_id), HttpStatus.CREATED);
     }
 
-    @PutMapping("/book")
-    @PreAuthorize("hasAuthority('USER')")
-    public void book(@RequestParam("eventId") Long eventId) {
-        log.info("event is {}", eventId);
-        kafkaProducerService.book(eventId);
-    }
 }

@@ -12,6 +12,7 @@ import com.example.booking.demo.repository.EventRespository;
 import com.example.booking.demo.repository.UserRepository;
 import com.example.booking.demo.service.EventService;
 import com.example.booking.demo.service.SubLocationService;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,8 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@NoArgsConstructor
 public class EventServiceImpl implements EventService {
-
-
-
 
     private EventRespository eventRespository;
     private SubLocationService subLocationService;
