@@ -34,31 +34,30 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
-        String path = request.getRequestURI();
-        log.info("path is {}", path);
-        log.info("authHeader : {}", authHeader);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             try {
                 String username = jwtService.extractUsername(token);
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    Person person = personService.findByEmail(username);
-                    log.info("person is {}", person);
-                    if (person != null && jwtService.validateToken(token, person)) {
-                        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                                person, null, person.getAuthorities());
-
-                        log.info("authToken : is {}", authToken);
-                        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                        SecurityContextHolder.getContext().setAuthentication(authToken);
-                    } else {
-                        log.info("Token is incorrect");
-                    }
+                    authenticateUser(request, token, username);
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
         filterChain.doFilter(request, response);
+    }
+
+    private void authenticateUser(HttpServletRequest request, String token, String username) {
+        Person person = personService.findByEmail(username);
+        if(person != null && jwtService.validateToken(token, person)) {
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    person, null, person.getAuthorities()
+            );
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+        } else {
+            log.info("Token validation failed for user {}", username);
+        }
     }
 }
