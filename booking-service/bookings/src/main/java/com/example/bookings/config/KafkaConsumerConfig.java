@@ -1,7 +1,7 @@
 package com.example.bookings.config;
 
 
-import com.example.bookings.dto.EventBookingDto;
+import com.example.booking.demo.dto.EventBookingDto;
 import com.example.bookings.exception.KafkaErrorHandler;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
