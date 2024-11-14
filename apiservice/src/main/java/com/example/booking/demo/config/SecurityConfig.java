@@ -43,7 +43,8 @@ public class SecurityConfig {
                                 "api/v1/auth/register",
                                 "api/v1/auth/login",
                                 "api/v1/admin/register",
-                                "api/v1/users"
+                                "api/v1/users",
+                                "api/v1/events/*"
                         )
                         .permitAll()
                         .anyRequest().authenticated())

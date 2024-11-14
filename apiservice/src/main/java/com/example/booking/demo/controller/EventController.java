@@ -26,4 +26,10 @@ public class EventController {
         return new ResponseEntity<EventDto>(eventService.create(eventDto, sub_location_id), HttpStatus.CREATED);
     }
 
+    @PutMapping("/book")
+//    @PreAuthorize("hasAuthority('USER')")
+    public void book(@RequestParam("eventId") Long eventId) {
+        eventService.book(eventId);
+    }
+
 }

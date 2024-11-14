@@ -1,6 +1,6 @@
 package com.example.bookings.service;
 
-import com.example.bookings.dto.EventBookingDto;
+import com.example.booking.demo.dto.EventBookingDto;
 import com.example.bookings.mapper.EventBookingMapper;
 import com.example.bookings.model.EventBooking;
 import com.example.bookings.repository.EventBookingRepository;
