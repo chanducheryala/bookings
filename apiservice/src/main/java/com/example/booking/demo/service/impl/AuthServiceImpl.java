@@ -6,14 +6,13 @@ import com.example.booking.demo.exceptions.UserNotFoundException;
 import com.example.booking.demo.model.Person;
 import com.example.booking.demo.repository.AuthRepository;
 import com.example.booking.demo.service.AuthService;
-import com.example.booking.demo.service.JwtService;
+import com.example.booking.demo.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Slf4j

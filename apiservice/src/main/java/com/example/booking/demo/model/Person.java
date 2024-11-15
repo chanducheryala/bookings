@@ -21,12 +21,12 @@ import java.util.Collections;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "person")
-public abstract class Person implements UserDetails {
+public abstract class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
 
     @Column(name = "username")
     private String username;
@@ -34,10 +34,8 @@ public abstract class Person implements UserDetails {
     @Column(name = "first_name")
     private String firstName;
 
-
     @Column(name = "last_name")
     private String lastName;
-
 
     @Column(name = "email")
     private String email;
@@ -61,34 +59,5 @@ public abstract class Person implements UserDetails {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
-    }
-    @JsonIgnore
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }
