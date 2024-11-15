@@ -1,27 +1,28 @@
-package com.example.booking.demo.config;
+package com.example.booking.demo.security;
 
-import com.example.booking.demo.model.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-public class UserToUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
+    private Long id;
     private String username;
     private String password;
     private List<GrantedAuthority> roles;
 
-    public UserToUserDetails(Person person) {
-        this.username = person.getUsername();
-        this.password = person.getPassword();
-        this.roles = (List<GrantedAuthority>) person.getAuthorities();
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
+    public UserDetailsImpl(
+            Long id,
+            String username,
+            String password,
+            List<GrantedAuthority> grantedAuthorities
+    ) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.roles = grantedAuthorities;
     }
 
     @Override
@@ -32,6 +33,11 @@ public class UserToUserDetails implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @Override

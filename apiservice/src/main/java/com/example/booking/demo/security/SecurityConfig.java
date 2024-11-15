@@ -1,6 +1,5 @@
-package com.example.booking.demo.config;
+package com.example.booking.demo.security;
 
-import com.example.booking.demo.repository.PersonRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,12 +24,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    private PersonRespository personRespository;
     private JwtAuthFilter jwtAuthFilter;
+    private UserDetailsServiceImpl userDetailsService;
 
-    public SecurityConfig(PersonRespository personRespository, JwtAuthFilter jwtAuthFilter) {
-        this.personRespository = personRespository;
+    public SecurityConfig(
+            JwtAuthFilter jwtAuthFilter,
+            UserDetailsServiceImpl userDetailsService
+    ) {
         this.jwtAuthFilter = jwtAuthFilter;
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean
@@ -53,10 +55,6 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> personRespository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("user name not found"));
-    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -67,11 +65,12 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder());
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(userDetailsService);
         return provider;
     }
 }

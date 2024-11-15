@@ -4,7 +4,7 @@ import com.example.booking.demo.dto.AuthDto;
 import com.example.booking.demo.dto.PersonDto;
 import com.example.booking.demo.model.Person;
 import com.example.booking.demo.service.AuthService;
-import com.example.booking.demo.service.JwtService;
+import com.example.booking.demo.security.JwtService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/auth")
 public class AuthController {
+
     private final AuthService authService;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
     @Autowired
-    public AuthController(AuthService authService, JwtService jwtService) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
