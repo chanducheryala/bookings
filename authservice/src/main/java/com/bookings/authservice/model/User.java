@@ -1,14 +1,11 @@
-package com.example.booking.demo.model;
+package com.bookings.authservice.model;
 
-import com.example.booking.demo.enums.Role;
+import com.bookings.authservice.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
+import jakarta.validation.constraints.Size;
 import lombok.experimental.Accessors;
-
-import java.util.Collection;
-import java.util.Collections;
 
 @Entity
 @Getter
@@ -17,10 +14,9 @@ import java.util.Collections;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "user")
 
-
-public abstract class Person {
-
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -50,12 +46,14 @@ public abstract class Person {
     @Column(name = "role")
     private Role role;
 
-    public Person(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
+    public User(String firstName, String lastName, String email, String phoneNumber, String username, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 }
+
