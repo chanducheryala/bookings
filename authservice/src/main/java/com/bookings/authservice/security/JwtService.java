@@ -1,6 +1,6 @@
-package com.example.booking.demo.security;
+package com.bookings.authservice.security;
 
-import com.example.booking.demo.model.Person;
+import com.bookings.authservice.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,12 +55,12 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String generateToken(Person person) {
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         return Jwts
                 .builder()
                 .setClaims(claims)
-                .setSubject(person.getEmail())
+                .setSubject(user.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 60 * 1000))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

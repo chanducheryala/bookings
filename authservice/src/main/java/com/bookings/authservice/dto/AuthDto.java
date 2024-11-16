@@ -1,4 +1,4 @@
-package com.example.booking.demo.dto;
+package com.bookings.authservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

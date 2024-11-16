@@ -1,4 +1,4 @@
-package com.example.booking.demo.security;
+package com.bookings.authservice.security;
 
 
 import jakarta.servlet.FilterChain;
