@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: authservice
+  datasource:
+    url: jdbc:mysql://localhost:3306/users
+    username: root
+    password: chandu
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  port: 8082
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${server.host:localhost}:8084/eureka
+jwt:
+  secret: "UEtB2vXTuLygAfxK36RrZABJHWIasP/iA14mT0Q7BDuMM4CDCFi4egUBzc1Ytepc0cb4xhDIDh/AOAif8k8t7g=="
