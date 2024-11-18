@@ -4,7 +4,6 @@ import com.example.booking.demo.dto.EventBookingDto;
 import com.example.booking.demo.dto.EventDto;
 import com.example.booking.demo.exceptions.NoEntryFound;
 import com.example.booking.demo.model.Event;
-import com.example.booking.demo.model.LocationSubManager;
 import com.example.booking.demo.model.SubLocation;
 import com.example.booking.demo.model.User;
 import com.example.booking.demo.repository.EventRepository;

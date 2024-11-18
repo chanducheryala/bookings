@@ -4,11 +4,14 @@ import com.example.booking.demo.enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
+
 @Entity
+@Table(name = "admin")
 public class Admin extends Person{
     public Admin(
             @NotNull String firstName,

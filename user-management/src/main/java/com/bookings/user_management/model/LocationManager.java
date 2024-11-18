@@ -1,25 +1,18 @@
-package com.example.booking.demo.model;
+package com.bookings.user_management.model;
 
-import com.example.booking.demo.enums.Role;
+import com.bookings.user_management.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import lombok.experimental.Accessors;
-
-import java.util.Collection;
-import java.util.Collections;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@ToString
-@Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-
-public abstract class Person {
-
+@Table(name = "location_manager")
+public class LocationManager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -49,7 +42,15 @@ public abstract class Person {
     @Column(name = "role")
     private Role role;
 
-    public Person(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
+    public LocationManager(){}
+    public LocationManager(
+            @NotNull String firstName,
+            @NotNull String lastName,
+            @NotNull String email,
+            @NotNull String phoneNumber,
+            @NotNull String username,
+            @NotNull String password
+    ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -57,4 +58,12 @@ public abstract class Person {
         this.username = username;
         this.password = password;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
+    @OneToOne(mappedBy = "locationManager")
+    private Location location;
+
 }
