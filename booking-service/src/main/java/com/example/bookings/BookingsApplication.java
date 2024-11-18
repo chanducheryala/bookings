@@ -1,4 +1,4 @@
-package com.bookings.authservice;
+package com.example.bookings;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AuthserviceApplication {
+public class BookingsApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(AuthserviceApplication.class, args);
+		SpringApplication.run(BookingsApplication.class, args);
 	}
 }

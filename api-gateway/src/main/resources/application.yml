@@ -1,0 +1,26 @@
+server:
+  port: 8085
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      httpClient:
+        connect-timeout: 60000
+        response-timeout: 60s
+
+jwt:
+  secret: "UEtB2vXTuLygAfxK36RrZABJHWIasP/iA14mT0Q7BDuMM4CDCFi4egUBzc1Ytepc0cb4xhDIDh/AOAif8k8t7g=="
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8084/eureka/
+
+
