@@ -1,8 +1,6 @@
 package com.example.booking.demo.service.impl;
 
 import com.example.booking.demo.dto.SubLocationDto;
-import com.example.booking.demo.exceptions.NoEntryFound;
-import com.example.booking.demo.model.LocationSubManager;
 import com.example.booking.demo.model.SubLocation;
 import com.example.booking.demo.repository.SubLocationRepository;
 import com.example.booking.demo.service.SubLocationService;

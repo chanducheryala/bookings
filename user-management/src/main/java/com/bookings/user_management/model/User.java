@@ -1,24 +1,21 @@
-package com.example.booking.demo.model;
+package com.bookings.user_management.model;
 
-import com.example.booking.demo.enums.Role;
+import com.bookings.user_management.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
+
 
 @Entity
 @Getter
 @Setter
-@ToString
-@Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-
-public abstract class Person {
+@Table(name = "user")
+public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,12 +46,30 @@ public abstract class Person {
     @Column(name = "role")
     private Role role;
 
-    public Person(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
+    public User(){}
+    public User(
+            @NotNull  String firstName,
+            @NotNull String lastName,
+            @NotNull String email,
+            @NotNull String phoneNumber,
+            @NotNull String username,
+            @NotNull String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
+    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_events",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> events;
+
+    public List<Event> getEvents() {
+        return events;
     }
 }

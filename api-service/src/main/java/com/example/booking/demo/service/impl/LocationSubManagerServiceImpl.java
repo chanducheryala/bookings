@@ -2,7 +2,6 @@ package com.example.booking.demo.service.impl;
 
 import com.example.booking.demo.dto.LocationSubManagerDto;
 import com.example.booking.demo.model.LocationManager;
-import com.example.booking.demo.model.LocationSubManager;
 import com.example.booking.demo.repository.LocationSubManagerRepository;
 import com.example.booking.demo.service.LocationSubManagerService;
 import lombok.extern.slf4j.Slf4j;

@@ -1,14 +1,12 @@
-package com.example.booking.demo.model;
+package com.bookings.user_management.model;
 
-import com.example.booking.demo.enums.Role;
+
+import com.bookings.user_management.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.Accessors;
-
-import java.util.Collection;
-import java.util.Collections;
 
 @Entity
 @Getter

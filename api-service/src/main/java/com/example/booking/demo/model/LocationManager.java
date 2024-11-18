@@ -30,6 +30,4 @@ public class LocationManager extends Person{
     @OneToOne(mappedBy = "locationManager")
     private Location location;
 
-    @OneToMany(mappedBy = "locationManager")
-    List<LocationSubManager> locationSubManagers;
 }
