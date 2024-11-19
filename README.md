@@ -36,7 +36,6 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 ## Location Manager Endpoints
 
 - **PUT**  `/location-managers/{id}`  Update the location manager with specified id
-
 - **POST**  `/location-managers/{id}` 
 
 
@@ -46,4 +45,13 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 - **GET**   `/locations/{id}` Get all location Details with the specified id
 - **PUT**   `/locations/${id}` Update the location with specified id
 - **DELETE** `/locations/${id}` Delete the location with specified id
--
+- **GET**   `/locations/events/${id}` Get all Events with specified location id
+
+
+
+## Event Endpoints
+
+- **POST**  `/events` Create a Event
+- **GET**   `/events/${id}` Get Event with specified id
+- **PUT**   `/events/{id}` Update the Event with specified id
+- **DELETE** `/events/${id}` Delete the Event with specified id
