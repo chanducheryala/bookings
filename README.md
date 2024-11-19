@@ -64,6 +64,7 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 1. **User**
 2. **Admin**
 3. **Location Manager**
+4. **Location**
 4. **Event**
 5. **Event Details**
 6. **Event Plans**
