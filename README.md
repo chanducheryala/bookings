@@ -49,3 +49,21 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 - **GET**   `/events/${id}` Get Event with specified id
 - **PUT**   `/events/{id}` Update the Event with specified id
 - **DELETE** `/events/${id}` Delete the Event with specified id
+
+
+## Event Booking Plans with Capacity
+
+1. **VIP Premium Plan**
+2. **Premium Plan**
+3. **Basic Plan**
+
+
+
+
+## Schema's
+1. **User**
+2. **Admin**
+3. **Location Manager**
+4. **Event**
+5. **Event Details**
+6. **Plans**
