@@ -5,6 +5,7 @@
   [microservice-flow](https://app.eraser.io/workspace/paH88tq70X1Yss9jXEpb)
 
 
+### Feedbacks are appreciated
 
 
 ## User Creational
@@ -22,9 +23,6 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 - **GET** `/admins/location-managers`  
   Get all location managers of admins.
 
-- **PUT** `/admins/location-managers/{id}`  
-  Update the location manager with the specified `id`.
-
 - **DELETE** `/admins/location-managers/{id}`  
   Delete the location manager with the specified `id`.
 
@@ -36,7 +34,7 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 ## Location Manager Endpoints
 
 - **PUT**  `/location-managers/{id}`  Update the location manager with specified id
-- **POST**  `/location-managers/{id}` 
+
 
 
 ## Location Endpoints
