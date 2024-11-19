@@ -1,8 +1,5 @@
 
-# TO-Do
-
-
-  [microservice-flow](https://app.eraser.io/workspace/paH88tq70X1Yss9jXEpb)
+[microservice-flow](https://app.eraser.io/workspace/paH88tq70X1Yss9jXEpb)
 
 
 ### Feedbacks are appreciated
@@ -44,7 +41,6 @@ Implement the **Factory Abstract Design Pattern** for creating a user with diffe
 - **PUT**   `/locations/${id}` Update the location with specified id
 - **DELETE** `/locations/${id}` Delete the location with specified id
 - **GET**   `/locations/events/${id}` Get all Events with specified location id
-
 
 
 ## Event Endpoints
