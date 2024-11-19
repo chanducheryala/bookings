@@ -9,22 +9,17 @@
 Implement the **Factory Abstract Design Pattern** for creating a user with different roles.
 
 ### Authentication Endpoints
-- **POST** `/auth/register`  
-  Create a user with the respective role.
+- **POST** `/auth/register` Create a user with the respective role.
 
-- **POST** `/auth/login`  
-  Validate user credentials.
+- **POST** `/auth/login` Validate user credentials and return token if valid
 
 ## Admin Endpoints
 
-- **GET** `/admins/location-managers`  
-  Get all location managers of admins.
+- **GET** `/admins/location-managers`Get all location managers of admins.
 
-- **DELETE** `/admins/location-managers/{id}`  
-  Delete the location manager with the specified `id`.
+- **DELETE** `/admins/location-managers/{id}` Delete the location manager with the specified `id`.
 
-- **GET** `/admins/locations/{id}`  
-  Get the details of a specific location by `id`.
+- **GET** `/admins/locations/{id}` Get the details of a specific location by `id`.
 
 
 
