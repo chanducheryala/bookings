@@ -1,6 +1,6 @@
 package com.bookings.authservice.security;
 
-import com.bookings.authservice.model.User;
+import com.bookings.authservice.model.Person;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -55,12 +55,12 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String generateToken(User user) {
+    public String generateToken(Person person) {
         Map<String, Object> claims = new HashMap<>();
         return Jwts
                 .builder()
                 .setClaims(claims)
-                .setSubject(user.getEmail())
+                .setSubject(person.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 60 * 1000))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

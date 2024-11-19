@@ -1,13 +1,9 @@
 package com.bookings.authservice.enums;
 
 public enum Role {
-    SUPER_ADMIN("Super Administrator"),
-    ADMIN("Administrator"),
-    SUB_ADMIN("Sub Administrator"),
-    USER("User"),
-    LOCATION_MANAGER("Location Manager"),
-    LOCATION_SUBMANAGER("Location Sub-Manager"),
-    CUSTOMER("Customer");
+    ADMIN("ADMIN"),
+    USER("USER"),
+    LOCATION_MANAGER("LOCATION_MANAGER");
 
     private final String displayName;
 

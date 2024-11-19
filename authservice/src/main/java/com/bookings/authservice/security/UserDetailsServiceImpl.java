@@ -1,7 +1,7 @@
 package com.bookings.authservice.security;
 
-import com.bookings.authservice.model.User;
-import com.bookings.authservice.repository.UserRepository;
+import com.bookings.authservice.model.Person;
+import com.bookings.authservice.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,18 +17,21 @@ import java.util.Optional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private PersonRepository personRepository;
 
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> person = userRepository.findByEmail(username);
+        Optional<Person> person = personRepository.findByEmail(username);
         if (person.isEmpty()) {
             throw new UsernameNotFoundException("No user found");
         }
         return new UserDetailsImpl(
                 person.get().getId(),
+                person.get().getFirstName(),
+                person.get().getLastName(),
                 person.get().getEmail(),
+                person.get().getPhoneNumber(),
                 person.get().getPassword(),
                 List.of(new SimpleGrantedAuthority(person.get().getRole().getDisplayName()))
         );

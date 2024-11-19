@@ -9,18 +9,27 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
-    private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
     private List<GrantedAuthority> roles;
 
     public UserDetailsImpl(
             Long id,
-            String username,
+            String firstName,
+            String lastName,
+            String email,
+            String phoneNumber,
             String password,
             List<GrantedAuthority> grantedAuthorities
     ) {
         this.id = id;
-        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.roles = grantedAuthorities;
     }
@@ -37,7 +46,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -58,5 +67,38 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetailsImpl{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

@@ -1,10 +1,12 @@
 package com.bookings.authservice.service;
 
 import com.bookings.authservice.dto.AuthDto;
-import com.bookings.authservice.dto.UserDto;
-import com.bookings.authservice.model.User;
-import com.bookings.authservice.repository.UserRepository;
+import com.bookings.authservice.dto.PersonDto;
+import com.bookings.authservice.model.Person;
+import com.bookings.authservice.model.PersonFactoryProvider;
+import com.bookings.authservice.repository.PersonRepository;
 import com.bookings.authservice.security.JwtService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,45 +16,43 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AuthServiceImpl implements AuthService{
 
     @Autowired
-    private UserRepository userRepository;
+    private PersonRepository personRepository;
     private AuthenticationManager authenticationManager;
     private JwtService jwtService;
+    private PersonFactoryProvider personFactoryProvider;
 
     public AuthServiceImpl(
-            UserRepository userRepository,
+            PersonRepository personRepository,
             AuthenticationManager authenticationManager,
-            JwtService jwtService
+            JwtService jwtService,
+            PersonFactoryProvider personFactoryProvider
     ) {
-        this.userRepository = userRepository;
+        this.personRepository = personRepository;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.personFactoryProvider = personFactoryProvider;
     }
 
     @Override
-    public UserDto create(UserDto userDto) {
-        User user = new User(
-                userDto.getFirstName(),
-                userDto.getLastName(),
-                userDto.getEmail(),
-                userDto.getPhoneNumber(),
-                userDto.getUsername(),
-                userDto.getPassword(),
-                userDto.getRole()
-        );
-        User savedUser = userRepository.save(user);
-        userDto.setId(savedUser.getId());
-        return userDto;
+    public PersonDto create(PersonDto personDto) {
+        Person person = personFactoryProvider.getFactory(personDto.getRole().getDisplayName()).create(personDto);
+        log.info("person {}", person);
+        Person savedPerson = personRepository.save(person);
+        log.info("saved person {}", savedPerson);
+        personDto.setId(savedPerson.getId());
+        return personDto;
     }
 
     @Override
     public String authenticate(AuthDto authDto) {
         try {
             Authentication authentication =  authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDto.getEmail(), authDto.getPassword()));
-            Optional<User> user = userRepository.findByEmail(authDto.getEmail());
+            Optional<Person> user = personRepository.findByEmail(authDto.getEmail());
             if(user.isPresent()) {
                 String token = jwtService.generateToken(user.get());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
